@@ -17,10 +17,12 @@ def index():
 def risp():
     indice = request.args['indice']
     radio = request.args['sel']
-    a = indice
-    b =  df[df['regione'] == indice]['capoluogo'].values[0]
-    return render_template('error.html', err=b)
-
+    if radio == 'regione':   
+        result =  df[df['regione'] == indice]['capoluogo'].values[0]
+        return render_template('indexcapo1.html', capol=result)
+    if radio == 'capoluogo':   
+        result =  df[df['capoluogo'] == indice]['regione'].values[0]
+        return render_template('indexcapo1.html', capol=result)
     return render_template('error.html')
 
 if __name__ == '__main__':
